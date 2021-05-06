@@ -2,19 +2,27 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Atualizar Cliente</title>
+    <title>Editar user</title>
 </head>
 <body>
-    <h1>Atualizar Cliente</h1>
+    <h1>Editar user</h1>
     <form action="/edit/{{cliente.id}}" method="POST">
         <table border="0">
             <tr>
-                <td>nome</td>
-                <td><input type="text" value="{{cliente.name}}" name="nome" size="40"></td>
+                <td>userName</td>
+                <td><input type="text" value="{{cliente.userName}}" name="userName" size="40"></td>
             </tr>
             <tr>
-                <td>Comentário</td>
-                <td><input type="text" value="{{cliente.comment}}" name="comentario" size="40"></td>
+                <td>Password</td>
+                <td><input type="text" value="{{cliente.Password}}" name="Password" size="40"></td>
+            </tr>
+            <tr>
+                <td>Name</td>
+                <td><input type="text" value="{{cliente.Name}}" name="Name" size="40"></td>
+            </tr> 
+            <tr>
+                <td>Email</td>
+                <td><input type="text" value="{{cliente.Email}}" name="Email" size="40"></td>
             </tr> 
             <tr>
                 <th colspan="2"><button type="submit">Salvar</button></th> 

@@ -2,26 +2,29 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Cadastro de Cliente</title>
+    <title>user</title>
 </head>
 <body>
-    <h1>Cadastro de Cliente</h1> 
-    <a href="/add">Adcionar Cliente</a>
+    <h1>user</h1> 
+    <a href="/add">Adicionar Usuário</a>
     <br />
     <table border="0" width="70%">
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Nome</th>
-                <th>Comentário</th>
-                <th>Ações</th>
+                <th>userName</th>
+                <th>Password</th>
+                <th>Name</th>
+                <th>Email</th>
        </thead> 
        <tbody>
             {% for c in clientes %}
             <tr>
                 <td>{{c.id}}</td>
-                <td>{{c.name}}</td>
-                <td>{{c.comment}}</td>
+                <td>{{c.userName}}</td>
+                <td>{{c.Password}}</td>
+                <td>{{c.Name}}</td>
+                <td>{{c.Email}}</td>
                 <td>
                     <a href="/edit/{{c.id}}">Editar</a>
                     <a href="/delete/{{c.id}}">Apagar</a>
