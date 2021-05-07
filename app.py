@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 # instncia do Flask
 app = Flask(__name__)
 # caminho do DB
-app.config ['SQLALCHEMY_DATABASE_URI'] = "sqlite:///dbcliente1"
+app.config ['SQLALCHEMY_DATABASE_URI'] = "sqlite:///dbcliente"
 # instancia do sqlalchemy
 db = SQLAlchemy(app)
 
@@ -23,11 +23,14 @@ class Cliente(db.Model):
         self.Name = Name
         self.Email = Email
 
+users = [{'login':Cliente.query.with_entities(Cliente.Email), 'senha': Cliente.query.with_entities(Cliente.Password)}]
+
+
 @app.route("/")
 def index():
     #selecionar todos - select * from
     clientes = Cliente.query.all()
-    return render_template("index.html", clientes=clientes)
+    return render_template("login.html", clientes=clientes)
 
 @app.route("/add", methods=['GET', 'POST'])
 def add():
@@ -37,7 +40,7 @@ def add():
         # adiciono o cliente (insert into)
         db.session.add(cliente)
         db.session.commit()
-        return redirect(url_for('index'))
+        return redirect(url_for('add'))
     return render_template("add.html")
     
 @app.route("/edit/<int:id>", methods=['GET', 'POST'])
@@ -48,7 +51,7 @@ def edit(id):
         cliente.userName = request.form['userName']
         cliente.Password = request.form['Password']
         cliente.Name = request.form['Name']
-        cliente.Email = request.form['Email']
+        cliente.Email = request.form['Password']
         db.session.commit()
         return redirect(url_for('index'))
     return render_template("edit.html", cliente = cliente)
@@ -59,7 +62,18 @@ def delete(id):
     db.session.delete(cliente)
     db.session.commit()
     return redirect(url_for('index'))
-      
+
+@app.route("/form_teste", methods=['PUT', 'POST'])
+def form_teste():
+   login = request.form["login"]
+   senha = request.form["password"]
+   for user in users:
+        if user['login'] == login and user['senha'] == senha:
+            return render_template("login_ok.html", login = login)
+        return render_template("login.html", mensagem = "Login inválido.")
+
+
+
 if __name__== "__main__":
     #cria Banco
     db.create_all()
